@@ -1,5 +1,5 @@
 import re, os, base64
-from colorama import Fore, init
+from colorama import Fore, Style, init
 
 init(autoreset=True)
 
@@ -9,12 +9,15 @@ def set_env_for_scan():
     get_user_config("password")
     get_user_config("license")
 
+def get_user_config(key):
+    os.environ[key.upper()] = input(f"\n{Fore.CYAN} Please enter the {key.title()} : {Style.RESET_ALL}").strip()
+    
 def get_user_selected_product_idx(products):
-    print(products)
     val = input(f"\nPlease enter a number between 1 and {len(products)} to select the product: ").strip()
+    
     if int(val) <= len(products):
-        idx = int(val)
-        print(f"products[idx] selected for scanning.")
+        idx = int(val) - 1 
+        print_success(f"{products[idx]['title']} selected for scanning.")
         return idx
     else :
         print("Invalid Product Index")
@@ -22,10 +25,6 @@ def get_user_selected_product_idx(products):
 
 def get_base64_encoded_val(data):
     return (base64.b64encode(data.encode("utf-8"))).decode("utf-8")
-
-def get_user_config(key):
-    val = input(f"Please enter the {key.title()} : ").strip()
-    os.environ[key.upper()] = val
 
 def print_info(data):
     print(Fore.WHITE + data )

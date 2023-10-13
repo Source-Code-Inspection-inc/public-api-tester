@@ -4,7 +4,8 @@ from helper import print_success, print_info, get_file_name_from_header, get_bas
 
 # Read environment variables from .env file
 load_dotenv()
-#BASE_URL=https://staging-internal.codewetrust-api.com test_user:token_123 6AB862-93BD86-C2DE65-AACC76-14D6D8-V3
+
+# using these for testing https://staging-internal.codewetrust-api.com test_user:token_123 6AB862-93BD86-C2DE65-AACC76-14D6D8-V3
 
 def make_request(endpoint, method="GET", data=None):
 

@@ -11,7 +11,6 @@ from api import (
     save_engineering_report_by_scan_id
 )
 
-# All the three endpoints are tested here
 def main():
 
     set_env_for_scan()
@@ -19,11 +18,11 @@ def main():
     get_status()
 
     products = get_all_products()
-    print(products)
+
     selected_product_idx  = get_user_selected_product_idx(products)
     scan_id = products[selected_product_idx]["scans"][0]["id"]
     
-    get_product_info(products[selected_product_idx]['id'])
+    get_product_info(products[selected_product_idx]["id"])
 
     save_executive_report_by_scan_id(scan_id)
     save_executive_details_report_by_scan_id(scan_id)
