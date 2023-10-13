@@ -1,6 +1,6 @@
 import os, json, requests
 from dotenv import load_dotenv
-from helper import print_success, print_info, get_file_name_from_header, get_base64_encoded_val
+from helper import print_success, print_info, save_file, get_base64_encoded_val
 
 # Read environment variables from .env file
 load_dotenv()
@@ -66,36 +66,18 @@ def save_engineering_report_by_scan_id(scan_id):
     response = make_request(endpoint, method="GET")
     if response.status_code == 200:
         print_success(f"Success - GET {endpoint}")
-        file_name = get_file_name_from_header(response.headers)
-
-        # Save the file to disk
-        with open(file_name, "wb") as file:
-            file.write(response.content)
-
-        print_success(f"File saved as {file_name}")
+        save_file(response)
 
 def save_executive_report_by_scan_id(scan_id):
     endpoint = f"/reports/Executive/{str(scan_id)}"
     response = make_request(endpoint, method="GET")
     if response.status_code == 200:
         print_success(f"Success - GET {endpoint}")        
-        file_name = get_file_name_from_header(response.headers)
-
-        # Save the file to disk
-        with open(file_name, "wb") as file:
-            file.write(response.content)
-
-        print_success(f"File saved as {file_name}")
+        save_file(response)
 
 def save_executive_details_report_by_scan_id(scan_id):
     endpoint = f"/reports/Executive/details/{str(scan_id)}"
     response = make_request(endpoint, method="GET")
     if response.status_code == 200:
         print_success(f"Success - GET {endpoint}")
-        file_name = get_file_name_from_header(response.headers)
-
-        # Save the file to disk
-        with open(file_name, "wb") as file:
-            file.write(response.content)
-
-        print_success(f"File saved as {file_name}")
+        save_file(response)
