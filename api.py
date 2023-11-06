@@ -1,23 +1,15 @@
 import os, json, requests
 from dotenv import load_dotenv
-from helper import print_success, print_info, save_file, get_base64_encoded_val
+from helper import print_success, print_info, print_error, save_file
 
-# Read environment variables from .env file
 load_dotenv()
 
-# using these for testing https://staging-internal.codewetrust-api.com test_user:token_123 6AB862-93BD86-C2DE65-AACC76-14D6D8-V3
-
-def make_request(endpoint, method="GET", data=None):
-
-    b64_auth_token = get_base64_encoded_val(f"{os.environ['USER NAME']}:{os.environ['PASSWORD']}")
-    b64_license_key = get_base64_encoded_val(os.environ['LICENSE']) 
-    
+def make_request(endpoint, method="GET", data=None):    
     headers = {
-        "Authorization": f"Basic {b64_auth_token}",
-        "CwtLicenseKey": f"{b64_license_key}",
+        "Authorization": f"{os.environ['TOKEN']}"
     }
 
-    url = f"{os.environ['URL']}{os.environ['VERSION']}{endpoint}"
+    url = f"{os.environ['URL']}/api/v1{endpoint}"
 
     print_info(f"\nFetching  {url}")
 
@@ -50,6 +42,9 @@ def get_all_products():
         print_success(f"Success - GET {endpoint}")
         for idx, product in enumerate(products):
             print_success(f"{str(idx + 1)}. {product['title']}")
+    else:
+        print_error("Access Failed, Check credentials or contact the Adminstrator!")
+        exit()
     return products
 
 def get_product_info(product_id):
