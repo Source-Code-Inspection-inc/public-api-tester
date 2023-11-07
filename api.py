@@ -79,3 +79,10 @@ def save_executive_details_report_by_scan_id(scan_id):
     if response.status_code == 200:
         print_success(f"Success - GET {endpoint}")
         save_file(response)
+
+def save_sbom_report_by_scan_id(scan_id):
+    endpoint = f"/reports/sbom/{str(scan_id)}"
+    response = make_request(endpoint, method="GET")
+    if response.status_code == 200:
+        print_success(f"Success - GET {endpoint}")
+        save_file(response)

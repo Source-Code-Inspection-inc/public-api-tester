@@ -7,7 +7,8 @@ from api import (
     get_product_info,
     save_executive_report_by_scan_id,
     save_executive_details_report_by_scan_id,
-    save_engineering_report_by_scan_id
+    save_engineering_report_by_scan_id,
+    save_sbom_report_by_scan_id
 )
 
 def main():
@@ -24,6 +25,7 @@ def main():
     save_executive_report_by_scan_id(scan_id)
     save_executive_details_report_by_scan_id(scan_id)
     save_engineering_report_by_scan_id(scan_id)
+    save_sbom_report_by_scan_id(scan_id)
 
 
 if __name__ == "__main__":
