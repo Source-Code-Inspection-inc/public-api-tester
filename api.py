@@ -1,15 +1,18 @@
 import os, json, requests
-from dotenv import load_dotenv
 from helper import print_success, print_info, print_error, save_file
 
-load_dotenv()
+#Removed config from .env to create the exe for windows machine using pyinstaller
+TOKEN="Bearer AAAMABNuRgZtHAjb3EpjHTT0urwmxfhmIryTv1WSfuQ="
+URL="https://staging-internal.codewetrust-api.com"
+VERSION="/api/v1"
+
 
 def make_request(endpoint, method="GET", data=None):    
     headers = {
-        "Authorization": f"{os.environ['TOKEN']}"
+        "Authorization": TOKEN
     }
 
-    url = f"{os.environ['URL']}/api/v1{endpoint}"
+    url = f"{URL}{VERSION}{endpoint}"
 
     print_info(f"\nFetching  {url}")
 
