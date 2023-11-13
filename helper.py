@@ -43,7 +43,7 @@ def save_file(response):
     match = re.search(
         r"filename=(.*?)(?:;|$)", response.headers.get("content-disposition")
     )
-    # remove the " \ characters from the file name
+    # remove the " \ characters from the file name some file are wrapped in quotes we dont need them here
     file_name = re.sub(r'[\\"]', '', match.group(1))
 
     # Save the file to disk
