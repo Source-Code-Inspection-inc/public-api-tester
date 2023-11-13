@@ -1,4 +1,5 @@
 from helper import(
+    set_env_for_scanning,
     get_user_selected_product_idx,
 )
 from api import (    
@@ -12,7 +13,7 @@ from api import (
 )
 
 def main():
-    
+    set_env_for_scanning()
     get_status()
 
     products = get_all_products()

@@ -1,18 +1,15 @@
 import os, json, requests
-from helper import print_success, print_info, print_error, save_file
+from helper import print_success, print_info, print_error, save_file , remove_trailing_slash
 
 #Removed config from .env to create the exe for windows machine using pyinstaller
-TOKEN="Bearer AAAMABNuRgZtHAjb3EpjHTT0urwmxfhmIryTv1WSfuQ="
-URL="https://staging-internal.codewetrust-api.com"
 VERSION="/api/v1"
-
 
 def make_request(endpoint, method="GET", data=None):    
     headers = {
-        "Authorization": TOKEN
+        "Authorization": "Bearer " + os.environ['TOKEN']
     }
 
-    url = f"{URL}{VERSION}{endpoint}"
+    url = f"{remove_trailing_slash(os.environ['URL'])}{VERSION}{endpoint}"
 
     print_info(f"\nFetching  {url}")
 

@@ -1,8 +1,19 @@
 import re, os, base64
 from colorama import Fore, Style, init
+from urllib.parse import urlparse, urlunparse
 
 init(autoreset=True)
-    
+
+def set_env_for_scanning():
+    get_user_config("URL")
+    get_user_config("TOKEN")
+
+def remove_trailing_slash(url):
+    return url.rstrip('/')
+
+def get_user_config(key):
+    os.environ[key] = input(f"\n{Fore.CYAN} Please enter the {key.title()} : {Style.RESET_ALL}").strip()
+
 def get_user_selected_product_idx(products):
 
     if(products != None and len(products) > 0):
@@ -33,8 +44,10 @@ def save_file(response):
     match = re.search(
         r"filename=(.*?)(?:;|$)", response.headers.get("content-disposition")
     )
+    # remove the " \ characters from the file name
+    file_name = re.sub(r'[\\"]', '', match.group(1))
+
     # Save the file to disk
-    file_name = match.group(1)
     with open(file_name, "wb") as file:
         file.write(response.content)
     
