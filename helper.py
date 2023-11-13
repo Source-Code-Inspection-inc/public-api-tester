@@ -1,4 +1,4 @@
-import re, os, base64
+import re, os
 from colorama import Fore, Style, init
 
 init(autoreset=True)

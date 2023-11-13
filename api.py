@@ -23,7 +23,6 @@ def make_request(endpoint, method="GET", data=None):
         raise ValueError("Invalid HTTP method")
     return response
 
-
 def get_status():
     endpoint = "/Status"
     response = make_request(endpoint, method="GET")
@@ -31,7 +30,6 @@ def get_status():
         result = json.loads(response.text)
         if result["status"] == "OK":
             print_success(f"Success - GET {endpoint}")
-
 
 def get_all_products():
     products = None
@@ -56,16 +54,10 @@ def get_product_info(product_id):
         print_success(f"Title:- {products['title']}")
         print_success(f"Lines Of Code:- {str(products['linesOfCode'])}")
 
-def save_engineering_report_by_scan_id(scan_id):
+def save_all_engineering_reports_by_scan_id(scan_id):
     save_response_to_file(f"/reports/Engineering/{str(scan_id)}")
-
-def save_executive_report_by_scan_id(scan_id):
     save_response_to_file(f"/reports/Executive/{str(scan_id)}")
-
-def save_executive_details_report_by_scan_id(scan_id):
     save_response_to_file(f"/reports/Executive/details/{str(scan_id)}")
-
-def save_sbom_report_by_scan_id(scan_id):
     save_response_to_file(f"/reports/sbom/{str(scan_id)}")
 
 def save_response_to_file(endpoint):
