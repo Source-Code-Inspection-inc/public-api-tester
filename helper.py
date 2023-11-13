@@ -1,6 +1,5 @@
 import re, os, base64
 from colorama import Fore, Style, init
-from urllib.parse import urlparse, urlunparse
 
 init(autoreset=True)
 

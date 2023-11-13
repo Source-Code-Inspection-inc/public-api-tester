@@ -57,29 +57,19 @@ def get_product_info(product_id):
         print_success(f"Lines Of Code:- {str(products['linesOfCode'])}")
 
 def save_engineering_report_by_scan_id(scan_id):
-    endpoint = f"/reports/Engineering/{str(scan_id)}"
-    response = make_request(endpoint, method="GET")
-    if response.status_code == 200:
-        print_success(f"Success - GET {endpoint}")
-        save_file(response)
+    save_response_to_file(f"/reports/Engineering/{str(scan_id)}")
 
 def save_executive_report_by_scan_id(scan_id):
-    endpoint = f"/reports/Executive/{str(scan_id)}"
+    save_response_to_file(f"/reports/Executive/{str(scan_id)}")
+
+def save_executive_details_report_by_scan_id(scan_id):
+    save_response_to_file(f"/reports/Executive/details/{str(scan_id)}")
+
+def save_sbom_report_by_scan_id(scan_id):
+    save_response_to_file(f"/reports/sbom/{str(scan_id)}")
+
+def save_response_to_file(endpoint):
     response = make_request(endpoint, method="GET")
     if response.status_code == 200:
         print_success(f"Success - GET {endpoint}")        
-        save_file(response)
-
-def save_executive_details_report_by_scan_id(scan_id):
-    endpoint = f"/reports/Executive/details/{str(scan_id)}"
-    response = make_request(endpoint, method="GET")
-    if response.status_code == 200:
-        print_success(f"Success - GET {endpoint}")
-        save_file(response)
-
-def save_sbom_report_by_scan_id(scan_id):
-    endpoint = f"/reports/sbom/{str(scan_id)}"
-    response = make_request(endpoint, method="GET")
-    if response.status_code == 200:
-        print_success(f"Success - GET {endpoint}")
         save_file(response)
