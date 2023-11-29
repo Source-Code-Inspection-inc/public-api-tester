@@ -1,4 +1,7 @@
-import os, json, requests
+import json
+import os
+import requests
+
 from helper import print_success, print_info, print_error, save_file, remove_trailing_slash
 
 # Removed config from .env to create the exe for Windows machine using pyinstaller
@@ -35,7 +38,6 @@ def get_status():
 
 
 def get_all_products():
-    products = None
     endpoint = "/Products"
     response = make_request(endpoint, method="GET")
     if response.status_code == 200:
@@ -44,7 +46,7 @@ def get_all_products():
         for idx, product in enumerate(products):
             print_success(f"{str(idx + 1)}. {product['title']}")
     else:
-        print_error("Access Failed, Check credentials or contact the Adminstrator!")
+        print_error("Access failed, check credentials or contact the administrator!")
         exit()
     return products
 
