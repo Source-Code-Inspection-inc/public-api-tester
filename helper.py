@@ -15,18 +15,18 @@ def get_user_config(key, title):
 
 def get_user_selected_product_idx(products):
 
-    if(products != None and len(products) > 0):
-        val = input(f"\nPlease enter a number between 1 and {len(products)} to select the product: ").strip()
-        
+    if products is not None and len(products) > 0:
+        val = input(f"\nSelect product (1..{len(products)}): ").strip()
+
         if int(val) <= len(products):
-            idx = int(val) - 1 
+            idx = int(val) - 1
             print_success(f"{products[idx]['title']} selected for scanning.")
             return idx
         else :
-            print("Invalid Product Index")
+            print("Invalid product index")
             get_user_selected_product_idx(products)
     else:
-        print("No Products for the user!")
+        print("No products found!")
         exit()
 
 def print_info(data):
@@ -49,7 +49,7 @@ def save_file(response):
     # Save the file to disk
     with open(file_name, "wb") as file:
         file.write(response.content)
-    
+
     print_success(f"File saved as {file_name}")
 
 
