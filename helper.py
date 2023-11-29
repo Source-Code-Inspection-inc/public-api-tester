@@ -4,14 +4,14 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 def set_env_for_scanning():
-    get_user_config("URL")
-    get_user_config("TOKEN")
+    get_user_config("URL", "API URL (without '/api')")
+    get_user_config("TOKEN", "Token")
 
 def remove_trailing_slash(url):
     return url.rstrip('/')
 
-def get_user_config(key):
-    os.environ[key] = input(f"\n{Fore.CYAN} Please enter the {key.title()} : {Style.RESET_ALL}").strip()
+def get_user_config(key, title):
+    os.environ[key] = input(f"\n{Fore.CYAN} {title}: {Style.RESET_ALL}").strip()
 
 def get_user_selected_product_idx(products):
 
